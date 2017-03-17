@@ -1,6 +1,5 @@
 package com.shaundashjian.funnygermanwords.controllers;
 
-
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -24,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shaundashjian.funnygermanwords.models.Word;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(locations = { "HomeControllerTests-context.xml" })
@@ -62,13 +62,14 @@ public class HomeControllerTests {
 
 			List<Word> actualList = ((List<Word>) map.get("words"));
 			int expectedSize = 2;
-			assertEquals(expectedSize, actualList.size());			
-			
+			assertEquals(expectedSize, actualList.size());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
+
 	@Test
 	public void test_GET_list_Words_returns_Words() {
 		try {
@@ -80,51 +81,74 @@ public class HomeControllerTests {
 
 			List<Word> actualList = ((List<Word>) map.get("words"));
 			int expectedSize = 2;
-			assertEquals(expectedSize, actualList.size());			
-			
+			assertEquals(expectedSize, actualList.size());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
+
 	@Test
 	public void test_GET_add_word_returns_view_add_Word() {
 		try {
 			MvcResult result = mockMvc.perform(get("/addWord.do")).andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
-			assertEquals("addword", mv.getViewName());	
+			assertEquals("addword", mv.getViewName());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+	@Test
+	public void test_GET_display_word_returns_view_display_and_Word() {
+		try {
+			MvcResult result = mockMvc.perform(get("/displayWord.do")
+					.param("wordInGerman", "Ohrwurm")
+					).andExpect(status().isOk()).andReturn();
+			ModelAndView mv = result.getModelAndView();
+			assertEquals("displayword", mv.getViewName());
+			
+			ModelMap map = mv.getModelMap();
+			assertNotNull(map.get("word"));
+			Word actualWord = (Word) map.get("word");
+			String expectedWordInGerman = "Ohrwurm";
+			assertEquals(expectedWordInGerman, actualWord.getWordInGerman());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
+
 	@Test
 	public void test_GET_edit_word_returns_view_edit_Word() {
 		try {
 			MvcResult result = mockMvc.perform(get("/editWord.do")).andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
-			assertEquals("editword", mv.getViewName());	
-			
+			assertEquals("editword", mv.getViewName());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
+
 	@Test
-	public void test_POST_create_word_returns_view_word_created_and_Word() {
+	public void test_GET_create_word_returns_view_word_created_and_Word() {
 		try {
 
-			MvcResult result = mockMvc.perform(
-					post("/createWord.do")
-					.param("wordInGerman", "Kummerspeck")
-					.param("literalTranslation", "Grief bacon")
-					.param("explanation", "When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
-					.param("pictureURL", "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg")
-					).andExpect(status().isOk()).andReturn();
+			MvcResult result = mockMvc
+					.perform(get("/createWord.do").param("wordInGerman", "Kummerspeck")
+							.param("literalTranslation", "Grief bacon")
+							.param("explanation",
+									"When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
+							.param("pictureURL", "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg"))
+					.andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
 			assertEquals("wordadded", mv.getViewName());
-			
+
 			ModelMap map = mv.getModelMap();
 			assertNotNull(map.get("word"));
 			Word actualWord = (Word) map.get("word");
@@ -136,27 +160,27 @@ public class HomeControllerTests {
 			assertEquals(expectedExplanation, actualWord.getExplanation());
 			String expectedPictureURL = "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg";
 			assertEquals(expectedPictureURL, actualWord.getPictureURL());
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
+
 	@Test
-	public void test_POST_update_word_returns_view_word_updated_and_Word() {
+	public void test_GET_update_word_returns_view_word_updated_and_Word() {
 		try {
-			
-			MvcResult result = mockMvc.perform(
-					post("/updateWord.do")
-					.param("wordInGerman", "Kummerspeck")
-					.param("literalTranslation", "Grief bacon")
-					.param("explanation", "When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
-					.param("pictureURL", "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg")
-					).andExpect(status().isOk()).andReturn();
+
+			MvcResult result = mockMvc
+					.perform(get("/updateWord.do").param("wordInGerman", "Kummerspeck")
+							.param("literalTranslation", "Grief bacon")
+							.param("explanation",
+									"When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
+							.param("pictureURL", "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg"))
+					.andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
 			assertEquals("wordupdated", mv.getViewName());
-			
+
 			ModelMap map = mv.getModelMap();
 			assertNotNull(map.get("word"));
 			Word actualWord = (Word) map.get("word");
@@ -167,44 +191,41 @@ public class HomeControllerTests {
 			String expectedExplanation = "When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.";
 			assertEquals(expectedExplanation, actualWord.getExplanation());
 			String expectedPictureURL = "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg";
-			assertEquals(expectedPictureURL, actualWord.getPictureURL());			
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.toString());
-		}
-	}
-	@Test
-	public void test_POST_delete_word_returns_view_word_deleted_and_Word() {
-		try {
-			MvcResult result = mockMvc.perform(
-					post("/deleteWord.do")
-					.param("wordInGerman", "Ohrwurm")
-					.param("literalTranslation", "Ear worm")
-					.param("explanation", "Have you ever listened to a song on the radio while driving to work only to find yourself still humming the same tune by lunch time? Congratulations, you’ve had an ear worm. The beautiful German word Ohrwurm describes the fact of having a song stuck in your head as if it wriggled itself into your brain through your ear.")
-					.param("pictureURL", "https://www.room217.ca/sites/default/files/wp-uploads/2012/02/earworm-300x246.jpg")
-					).andExpect(status().isOk()).andReturn();
-			ModelAndView mv = result.getModelAndView();
-			assertEquals("worddeleted", mv.getViewName());
-			
-			ModelMap map = mv.getModelMap();
-			assertNotNull(map.get("word"));
-			Word actualWord = (Word) map.get("word");
-			String expectedWordInGerman = "Ohrwurm";
-			assertEquals(expectedWordInGerman, actualWord.getWordInGerman());
-			
-			assertNotNull(map.get("words"));
-			List<Word> actualList = ((List<Word>) map.get("words"));
-			int expectedSize = 1;
-			assertEquals(expectedSize, actualList.size());	
-			for(Word word : actualList){
-				assertNotEquals(expectedWordInGerman, word.getWordInGerman());
-			}
-					
+			assertEquals(expectedPictureURL, actualWord.getPictureURL());
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
 
-	
+	@Test
+	public void test_GET_delete_word_returns_view_word_deleted_and_Word() {
+		try {
+			MvcResult result = mockMvc
+					.perform(get("/deleteWord.do")
+							.param("wordInGerman", "Ohrwurm")
+							).andExpect(status().isOk()).andReturn();
+			ModelAndView mv = result.getModelAndView();
+			assertEquals("worddeleted", mv.getViewName());
+
+			ModelMap map = mv.getModelMap();
+			assertNotNull(map.get("word"));
+			Word actualWord = (Word) map.get("word");
+			String expectedWordInGerman = "Ohrwurm";
+			assertEquals(expectedWordInGerman, actualWord.getWordInGerman());
+
+			assertNotNull(map.get("words"));
+			List<Word> actualList = ((List<Word>) map.get("words"));
+			int expectedSize = 1;
+			assertEquals(expectedSize, actualList.size());
+			for (Word word : actualList) {
+				assertNotEquals(expectedWordInGerman, word.getWordInGerman());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
 }

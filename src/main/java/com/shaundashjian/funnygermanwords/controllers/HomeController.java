@@ -60,6 +60,18 @@ public class HomeController {
 		return "addword";
 	}
 	/**
+	 * Handles displayWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/displayWord.do", method = RequestMethod.GET)
+	public ModelAndView displayWord(String wordInGerman) {
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("displayword");
+	    mv.addObject("word", wordDAO.readWord(wordInGerman));
+	    return mv;
+	}
+	/**
 	 * Handles editWord.do 
 	 * @param model
 	 * @return
@@ -73,7 +85,7 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/createWord.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/createWord.do", method = RequestMethod.GET)
 	public ModelAndView createWord(Word word) {
 		wordDAO.createWord(word);
 		ModelAndView mv = new ModelAndView();
@@ -86,7 +98,7 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/updateWord.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateWord.do", method = RequestMethod.GET)
 	public ModelAndView updateWord(Word word) {
 		wordDAO.updateWord(word);
 		ModelAndView mv = new ModelAndView();
@@ -99,9 +111,10 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/deleteWord.do", method = RequestMethod.POST)
-	public ModelAndView deleteWord(Word word) {
-		wordDAO.deleteWord(word.getWordInGerman());
+	@RequestMapping(value = "/deleteWord.do", method = RequestMethod.GET)
+	public ModelAndView deleteWord(String wordInGerman) {
+		Word word = wordDAO.readWord(wordInGerman);
+		wordDAO.deleteWord(wordInGerman);
 		ModelAndView mv = new ModelAndView();
 	    mv.setViewName("worddeleted");
 	    mv.addObject("word", word);

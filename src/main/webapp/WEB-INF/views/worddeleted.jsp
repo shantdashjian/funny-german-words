@@ -27,25 +27,23 @@
 
 </head>
 <body>
-<jsp:include page="navbar.jsp" />
+	<jsp:include page="navbar.jsp" />
 
-	
+
 	<div class="container">
 		<div class="row">
-			<c:forEach var="word" items="${words}">
-				<div class="col-md-3">
-			
-					<div class="thumbnail">
-						<a href="displayWord.do?wordInGerman=${word.wordInGerman}">
-							<div class="caption">
-								<h4>${word.wordInGerman}</h4>
-								<p>${word.literalTranslation}</p>
-							</div> <img src=${word.pictureURL } alt=${word.wordInGerman }> 
-							
-						</a>
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Word Removed</h3>
+					</div>
+					<div class="panel-body">${word.wordInGerman} has been removed from the list
+					<a href="main.do"><button type="button" class="btn pull-right btn-primary btn-sm">Home</button></a>
+					
 					</div>
 				</div>
-			</c:forEach>
+			</div>
+
 		</div>
 	</div>
 </body>

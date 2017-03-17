@@ -20,7 +20,7 @@ public class MockWordDAO implements WordDAO {
 	public void loadWords(){
 		words.clear();
 		words.put("Ohrwurm", new Word("Ohrwurm", "Ear worm", "Have you ever listened to a song on the radio while driving to work only to find yourself still humming the same tune by lunch time? Congratulations, you’ve had an ear worm. The beautiful German word Ohrwurm describes the fact of having a song stuck in your head as if it wriggled itself into your brain through your ear."
-				, "https://www.room217.ca/sites/default/files/wp-uploads/2012/02/earworm-300x246.jpg"));
+				, "http://www.suedkurier.de/storage/image/9/6/7/3/7383769_storagepic-frame-945x560_1oEGpO_DVfhK7.jpg"));
 		words.put("Fernweh", new Word("Fernweh", "Distance pain", "This gem describes the feeling of wanting to be somewhere else. It’s kind of like a reverse homesickness (Heimweh in German), a longing for a place that isn’t where you are right now. Fernweh is also a frequent reason for people in Germany to go on holiday."
 				, "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Flughafen_Berlin-Tempelhof_bei_Sonnenuntergang_-_Fernweh_%28152672327%29.jpg/1920px-Flughafen_Berlin-Tempelhof_bei_Sonnenuntergang_-_Fernweh_%28152672327%29.jpg"));
 

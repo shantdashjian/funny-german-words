@@ -27,25 +27,22 @@
 
 </head>
 <body>
-<jsp:include page="navbar.jsp" />
+	<jsp:include page="navbar.jsp" />
 
-	
+
 	<div class="container">
 		<div class="row">
-			<c:forEach var="word" items="${words}">
-				<div class="col-md-3">
-			
-					<div class="thumbnail">
-						<a href="displayWord.do?wordInGerman=${word.wordInGerman}">
-							<div class="caption">
-								<h4>${word.wordInGerman}</h4>
-								<p>${word.literalTranslation}</p>
-							</div> <img src=${word.pictureURL } alt=${word.wordInGerman }> 
-							
-						</a>
-					</div>
-				</div>
-			</c:forEach>
+
+			<ul class="list-group">
+				<c:forEach var="word" items="${words}">
+					<li class="list-group-item">${word.wordInGerman}:
+						${word.literalTranslation} 
+						<a href="deleteWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-danger btn-sm">Delete</button></a>
+						<a href="updateWord.do"><button type="button" class="btn pull-right btn-primary btn-sm">Update</button></a>
+					</li>
+				</c:forEach>
+			</ul>
+
 		</div>
 	</div>
 </body>

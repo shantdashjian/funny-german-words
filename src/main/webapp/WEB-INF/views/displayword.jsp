@@ -27,25 +27,20 @@
 
 </head>
 <body>
-<jsp:include page="navbar.jsp" />
-
-	
+	<jsp:include page="navbar.jsp" />
 	<div class="container">
 		<div class="row">
-			<c:forEach var="word" items="${words}">
-				<div class="col-md-3">
-			
-					<div class="thumbnail">
-						<a href="displayWord.do?wordInGerman=${word.wordInGerman}">
-							<div class="caption">
-								<h4>${word.wordInGerman}</h4>
-								<p>${word.literalTranslation}</p>
-							</div> <img src=${word.pictureURL } alt=${word.wordInGerman }> 
-							
-						</a>
-					</div>
+			<div class="media">
+				<div class="media-left">
+					<a href="#"> <img class="media-object" src=${word.pictureURL} alt=${word.wordInGerman } 
+						width="350">
+					</a>
 				</div>
-			</c:forEach>
+				<div class="media-body">
+					<h4 class="media-heading">${word.wordInGerman}: ${word.literalTranslation}</h4>
+					${word.explanation}
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
