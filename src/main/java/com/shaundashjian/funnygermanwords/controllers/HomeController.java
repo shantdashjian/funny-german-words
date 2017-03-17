@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.shaundashjian.funnygermanwords.models.Word;
 import com.shaundashjian.funnygermanwords.models.WordDAO;
 
 /**
@@ -29,12 +31,82 @@ public class HomeController {
 	}
 	
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * Handles main.do welcome page
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String home(Model model) {
 		model.addAttribute("words", wordDAO.readWords());		
 		return "home";
+	}
+	/**
+	 * Handles listWords.do welcome page
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/listWords.do", method = RequestMethod.GET)
+	public String listWords(Model model) {
+		model.addAttribute("words", wordDAO.readWords());		
+		return "listwords";
+	}
+	/**
+	 * Handles addWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/addWord.do", method = RequestMethod.GET)
+	public String addWord(Model model) {
+		return "addword";
+	}
+	/**
+	 * Handles editWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/editWord.do", method = RequestMethod.GET)
+	public String editWord(Model model) {
+		return "editword";
+	}
+	/**
+	 * Handles createWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/createWord.do", method = RequestMethod.POST)
+	public ModelAndView createWord(Word word) {
+		wordDAO.createWord(word);
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("wordadded");
+	    mv.addObject("word", wordDAO.readWord(word.getWordInGerman()));
+	    return mv;
+	}
+	/**
+	 * Handles updateWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updateWord.do", method = RequestMethod.POST)
+	public ModelAndView updateWord(Word word) {
+		wordDAO.updateWord(word);
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("wordupdated");
+	    mv.addObject("word", wordDAO.readWord(word.getWordInGerman()));
+	    return mv;
+	}
+	/**
+	 * Handles deletedWord.do 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/deleteWord.do", method = RequestMethod.POST)
+	public ModelAndView deleteWord(Word word) {
+		wordDAO.deleteWord(word.getWordInGerman());
+		ModelAndView mv = new ModelAndView();
+	    mv.setViewName("worddeleted");
+	    mv.addObject("word", word);
+	    mv.addObject("words", wordDAO.readWords());
+	    return mv;
 	}
 	
 }
