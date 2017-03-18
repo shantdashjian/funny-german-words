@@ -77,15 +77,19 @@ public class HomeController {
 	 * @return
 	 */
 	@RequestMapping(value = "/editWord.do", method = RequestMethod.GET)
-	public String editWord(Model model) {
-		return "editword";
+	public ModelAndView editWord(String wordInGerman) {
+		Word word = wordDAO.readWord(wordInGerman);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("editword");
+		mv.addObject("word", word);
+		return mv;
 	}
 	/**
 	 * Handles createWord.do 
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/createWord.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/createWord.do", method = RequestMethod.POST)
 	public ModelAndView createWord(Word word) {
 		wordDAO.createWord(word);
 		ModelAndView mv = new ModelAndView();
@@ -98,7 +102,7 @@ public class HomeController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/updateWord.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/updateWord.do", method = RequestMethod.POST)
 	public ModelAndView updateWord(Word word) {
 		wordDAO.updateWord(word);
 		ModelAndView mv = new ModelAndView();

@@ -125,9 +125,16 @@ public class HomeControllerTests {
 	@Test
 	public void test_GET_edit_word_returns_view_edit_Word() {
 		try {
-			MvcResult result = mockMvc.perform(get("/editWord.do")).andExpect(status().isOk()).andReturn();
+			MvcResult result = mockMvc.perform(get("/editWord.do")
+					.param("wordInGerman", "Ohrwurm")
+					).andExpect(status().isOk()).andReturn();
 			ModelAndView mv = result.getModelAndView();
 			assertEquals("editword", mv.getViewName());
+			ModelMap map = mv.getModelMap();
+			assertNotNull(map.get("word"));
+			Word actualWord = (Word) map.get("word");
+			String expectedWordInGerman = "Ohrwurm";
+			assertEquals(expectedWordInGerman, actualWord.getWordInGerman());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,11 +143,11 @@ public class HomeControllerTests {
 	}
 
 	@Test
-	public void test_GET_create_word_returns_view_word_created_and_Word() {
+	public void test_POST_create_word_returns_view_word_created_and_Word() {
 		try {
 
 			MvcResult result = mockMvc
-					.perform(get("/createWord.do").param("wordInGerman", "Kummerspeck")
+					.perform(post("/createWord.do").param("wordInGerman", "Kummerspeck")
 							.param("literalTranslation", "Grief bacon")
 							.param("explanation",
 									"When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
@@ -168,12 +175,12 @@ public class HomeControllerTests {
 	}
 
 	@Test
-	public void test_GET_update_word_returns_view_word_updated_and_Word() {
+	public void test_POST_update_word_returns_view_word_updated_and_Word() {
 		try {
 
 			MvcResult result = mockMvc
-					.perform(get("/updateWord.do").param("wordInGerman", "Kummerspeck")
-							.param("literalTranslation", "Grief bacon")
+					.perform(post("/updateWord.do").param("wordInGerman", "Kummerspeck")
+							.param("literalTranslation", "Grief bacon and eggs")
 							.param("explanation",
 									"When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.")
 							.param("pictureURL", "https://farm7.staticflickr.com/6067/6057404732_f7169a6664_z.jpg"))
@@ -186,7 +193,7 @@ public class HomeControllerTests {
 			Word actualWord = (Word) map.get("word");
 			String expectedWordInGerman = "Kummerspeck";
 			assertEquals(expectedWordInGerman, actualWord.getWordInGerman());
-			String expectedLiteralTranslation = "Grief bacon";
+			String expectedLiteralTranslation = "Grief bacon and eggs";
 			assertEquals(expectedLiteralTranslation, actualWord.getLiteralTranslation());
 			String expectedExplanation = "When a relationship ends or during other times of sadness, anger, or worry, it’s common to put on a few pounds of Kummerspeck. What it means is the excess weight put on by emotional overeating. So when you find yourself on the couch watching “Bridget Jones’ Diary” with a tub of ice cream, you are in fact feeding your grief bacon.";
 			assertEquals(expectedExplanation, actualWord.getExplanation());

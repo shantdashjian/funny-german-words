@@ -16,9 +16,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
-	
+<link href="https://fonts.googleapis.com/css?family=Germania+One"
+	rel="stylesheet">
 <link rel="stylesheet" href="css/master.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
@@ -35,21 +36,33 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
-
-
 	<div class="container">
 		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Word Updated</h3>
+					</div>
+					<div class="panel-body">${word.wordInGerman}
+						has been updated.<a href="main.do"><button
+								type="button" class="btn pull-right btn-primary btn-sm">Home</button></a>
 
-			<ul class="list-group">
-				<c:forEach var="word" items="${words}">
-					<li class="list-group-item">${word.wordInGerman}:
-						${word.literalTranslation} 
-						<a href="deleteWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-danger btn-sm">Delete</button></a>
-						<a href="editWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-primary btn-sm">Edit</button></a>
-					</li>
-				</c:forEach>
-			</ul>
+					</div>
+				</div>
 
+				<div class="media">
+					<div class="media-left">
+						<a href="#"> <img class="media-object" src=${word.pictureURL
+							} alt=${word.wordInGerman } width="350">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">${word.wordInGerman}:
+							${word.literalTranslation}</h4>
+						${word.explanation}
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

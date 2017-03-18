@@ -16,9 +16,10 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
-	
+<link href="https://fonts.googleapis.com/css?family=Germania+One"
+	rel="stylesheet">
 <link rel="stylesheet" href="css/master.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
@@ -40,16 +41,22 @@
 	<div class="container">
 		<div class="row">
 
-			<ul class="list-group">
-				<c:forEach var="word" items="${words}">
-					<li class="list-group-item">${word.wordInGerman}:
-						${word.literalTranslation} 
-						<a href="deleteWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-danger btn-sm">Delete</button></a>
-						<a href="editWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-primary btn-sm">Edit</button></a>
-					</li>
-				</c:forEach>
-			</ul>
-
+			<div class="col-md-4">
+				<div class="form_main">
+					<h4 class="heading">
+						<strong>Edit Word </strong><span></span>
+					</h4>
+					<div class="form">
+						<form action="updateWord.do" method="POST">
+							<input class="txt" name="wordInGerman" type="text" value="${word.wordInGerman}" /> 
+							<input class="txt" name="literalTranslation" type="text" value="${word.literalTranslation}" />
+							<textarea class="txt_3" type="text" name="explanation">${word.explanation}</textarea>
+							<input class="txt" name="pictureURL" type="text" value="${word.pictureURL}" /> 
+								<input type="submit" value="Update" name="submit" class="txt2">
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
