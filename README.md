@@ -1,12 +1,14 @@
 # funny-german-words
-A web application that lists some funny German words. Users can add a new word, display it, update it, and delete it.
+A web application that lists some funny German words. Users can add a new word, display it, update it, and delete it. This was my Spring Web MVC project from Week 7 at the Skill Distillery full-stack web development bootcamp.
 
 ![alt text](funny-german-words.png "FunnyGermanWords")
 
 ## In This Document:
 1. [Application URL](#application-url)
 2. [How to Use the Application](#how-touse-the-application)
-3. [Architecture and Technologies Used](#architecture-and-technologies-used)
+3. [Technologies Used](#technologies-used)
+4. [Future Feature Sets](#future-feature-sets)
+5. [Stumbling and Learning Points](#stumbling-and-learning-points)
 
 ## Application URL
 http://www.shaundashjian.com:8080/FunnyGermanWords/
@@ -23,11 +25,22 @@ http://www.shaundashjian.com:8080/FunnyGermanWords/
   * Click the Edit button to edit the details of the German word
   * Click the Delete button to delete the word from the list
 
-## Architecture and Technologies Used
-The application uses the [Spring Web MVC framework](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) with JSP for the view layer. Development was Test-Driven using JUnit.
-
-  * **The View Layer:**
-The JSP uses [Bootstrap](http://getbootstrap.com).
+## Technologies Used
+  * [Spring Web MVC framework](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) 
+  * JSP with Bootstrap
+  * JUnit
+  * Gradle
+  
+## Future Feature Sets:
+  * The ability to add videos to new and existing words
+  * The ability to search for a certain word
+  * Replace the local file and list with a database on the back-end
+  * Add a blog about German language to the site
+  
+## Stumbling and Learning Points:
+  * It took some time to have all dependencies added with the correct version
+  * Linking a background-image by setting the property in the .css file did not work. Instead, I had to embed the style in every html file as a workaround
+  * I learned how to include a jsp snippet using '<jsp:include page="navbar.jsp" />'. This helped have thenavigation bar in one .jsp file instead of repeating the code in every page jsp.
 <hr>
 
 [Up](README.md)
