@@ -40,7 +40,7 @@ http://www.shaundashjian.com:8080/FunnyGermanWords/
 ## Stumbling and Learning Points:
   * It took some time to have all dependencies added with the correct version
   * Linking a background-image by setting the property in the .css file did not work. Instead, I had to embed the style in every html file as a workaround
-  * I learned how to include a jsp snippet using '<jsp:include page="navbar.jsp" />'. This helped have thenavigation bar in one .jsp file instead of repeating the code in every page jsp.
+  * I learned how to include a jsp snippet using `<jsp:include page="navbar.jsp" />`. This helped have the navigation bar in one .jsp file instead of repeating the code in every page jsp.
 <hr>
 
 [Up](README.md)
