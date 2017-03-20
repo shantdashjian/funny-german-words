@@ -26,7 +26,7 @@ http://www.shaundashjian.com:8080/FunnyGermanWords/
   * Click the Delete button to delete the word from the list
 
 ## Technologies Used
-  * [Spring Web MVC framework](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) 
+  * [Spring Web MVC framework](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html){:target="_blank"}
   * JSP with Bootstrap
   * JUnit
   * Gradle
