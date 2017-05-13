@@ -43,7 +43,13 @@
 		<div class="row">
 
 			<ul class="list-group">
-				<c:forEach var="word" items="${words}">
+				<c:forEach var="word" items="${coreWords}">
+					<li class="list-group-item">${word.wordInGerman}:
+						${word.literalTranslation} 
+						<a href="editWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-primary btn-sm">Edit</button></a>
+					</li>
+				</c:forEach>
+				<c:forEach var="word" items="${extraWords}">
 					<li class="list-group-item">${word.wordInGerman}:
 						${word.literalTranslation} 
 						<a href="deleteWord.do?wordInGerman=${word.wordInGerman}"><button type="button" class="btn pull-right btn-danger btn-sm">Delete</button></a>

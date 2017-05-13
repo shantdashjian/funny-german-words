@@ -37,7 +37,10 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String home(Model model) {
+		
 		model.addAttribute("words", wordDAO.readWords());		
+		model.addAttribute("coreWords", wordDAO.readCoreWords());		
+		model.addAttribute("extraWords", wordDAO.readExtraWords());		
 		return "home";
 	}
 	/**
@@ -48,6 +51,8 @@ public class HomeController {
 	@RequestMapping(value = "/listWords.do", method = RequestMethod.GET)
 	public String listWords(Model model) {
 		model.addAttribute("words", wordDAO.readWords());		
+		model.addAttribute("coreWords", wordDAO.readCoreWords());		
+		model.addAttribute("extraWords", wordDAO.readExtraWords());		
 		return "listwords";
 	}
 	/**
@@ -123,6 +128,8 @@ public class HomeController {
 	    mv.setViewName("worddeleted");
 	    mv.addObject("word", word);
 	    mv.addObject("words", wordDAO.readWords());
+	    mv.addObject("coreWords", wordDAO.readCoreWords());
+	    mv.addObject("extraWords", wordDAO.readExtraWords());
 	    return mv;
 	}
 	

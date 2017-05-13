@@ -53,4 +53,16 @@ public class MockWordDAO implements WordDAO {
 		words.remove(wordInGerman);
 	}
 
+	@Override
+	public List<Word> readCoreWords() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Word> readExtraWords() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

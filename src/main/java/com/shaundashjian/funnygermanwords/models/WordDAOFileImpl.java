@@ -16,6 +16,7 @@ import org.springframework.web.context.WebApplicationContext;
 public class WordDAOFileImpl implements WordDAO {
 	private static final String FILE_NAME="/WEB-INF/funny-german-words.tsv";
 	private Map<String, Word> words = new HashMap<>();
+	public static final int CORE_WORDS_SIZE = 6;
 	/*
 	 * Use Autowired to have Spring inject an instance
 	 * of a WebApplicationContext into this object after
@@ -69,6 +70,17 @@ public class WordDAOFileImpl implements WordDAO {
 	public List<Word> readWords() {
 		List<Word> words = new ArrayList<>(this.words.values());
 		return words;
+	}
+	
+	@Override
+	public List<Word> readCoreWords() {
+		List<Word> words = new ArrayList<>(this.words.values());
+		return words.subList(0, CORE_WORDS_SIZE);
+	}
+	@Override
+	public List<Word> readExtraWords() {
+		List<Word> words = new ArrayList<>(this.words.values());
+		return words.subList(CORE_WORDS_SIZE, words.size());
 	}
 
 	@Override
